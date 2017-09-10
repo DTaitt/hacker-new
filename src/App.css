@@ -8,3 +8,9 @@ a {
 
 ul {
   list-style: none; }
+
+.story {
+  background: sandybrown;
+  margin: 5px; }
+  .story p {
+    margin: 2px 0; }

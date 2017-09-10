@@ -42,7 +42,7 @@ class StoryListContainer extends Component {
         
         return(
             
-            <p>rendering storylist container </p>        
+            <StoryList topStories = { this.state.topStories } />      
         );
     }
 }
