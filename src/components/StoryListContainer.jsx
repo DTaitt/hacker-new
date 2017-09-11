@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import StoryList from './StoryList';
 
-
+// moment().format();
 
 class StoryListContainer extends Component {
         
@@ -30,6 +31,7 @@ class StoryListContainer extends Component {
                         })
                         .then(storyJson => {
                             //console.log(storyJson)
+                            storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm")
                             this.setState((prevState) => ({
                                 topStories: [...prevState.topStories, storyJson]
                             }))
