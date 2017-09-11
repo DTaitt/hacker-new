@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import StoryList from './StoryList';
-
-// moment().format();
+import StoryFilter from './StoryFilter';
 
 class StoryListContainer extends Component {
         
     state = {
         topStories: [],
-        //isTopStoriesLoaded: false,
+        newStories: [],
     }
     
 
@@ -43,8 +42,10 @@ class StoryListContainer extends Component {
     render() {
         
         return(
-            
-            <StoryList topStories = { this.state.topStories } />      
+            <div>
+            <StoryFilter />
+            <StoryList topStories = { this.state.topStories } /> 
+            </div>     
         );
     }
 }
