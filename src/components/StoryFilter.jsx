@@ -7,7 +7,7 @@ export default class StoryFilter extends Component {
         value: "top",
     }
 
-    handleChange = this.handleChange.bind(this);
+    // handleChange = this.handleChange.bind(this);
 
     //   componentDidMount() {
     //     this.props.handleStoryFilter(this.state.value);
@@ -17,11 +17,11 @@ export default class StoryFilter extends Component {
         return nextState.value !== this.state.value;
     }
     
-    handleChange(e) {
-        this.setState({
-            value: e.target.value
-        }, () => { this.props.handleStoryFilter(this.state.value); });
-    }
+    // handleChange(e) {
+    //     this.setState({
+    //         value: e.target.value
+    //     }, () => { this.props.handleStoryFilter(this.state.value); });
+    // }
 
     render() {
         return(

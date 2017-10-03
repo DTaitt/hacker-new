@@ -1,17 +1,29 @@
+// @flow
 import React from 'react';
-import { arrayOf, object } from 'prop-types';
 
 import StoryContainer from './StoryContainer';
 
-StoryList.propTypes = {
-    topStories: arrayOf(object),
+type Props = {
+    topStories: Object[],
 }
 
-export default function StoryList(props) {
+type story = {
+    by: string,
+    descendants: number,
+    id: number, 
+    kids: Number[],
+    score: number,
+    time: string,
+    title: string,
+    type: string,
+    url: string,
+}
+
+export default function StoryList(props: Props) {
     return(
         <section className = "story-list">
             {   
-                props.topStories.slice(5, 10).map((story) => {
+                props.topStories.slice(5, 10).map((story: story) => {
                     return (<StoryContainer 
                         key = { story.id }
                         title = { story.title } 

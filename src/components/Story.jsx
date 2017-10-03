@@ -1,6 +1,15 @@
+// @flow
 import React from 'react'
 
-export default function Story(props) {
+type Props = {
+    url: string,
+    title: string,
+    by: string,
+    score: number,
+    time: string,
+}
+
+export default function Story(props: Props) {
     return(
         <div className = "story">
             <a href = { props.url }><h2>{ props.title }</h2></a>

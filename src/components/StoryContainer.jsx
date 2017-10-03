@@ -1,8 +1,19 @@
+// @flow
 import React, { Component } from 'react';
 
 import Story from './Story';
 
-class StoryContainer extends Component {
+type Props = {
+    title: string,
+    by: string,
+    score: number,
+    time: string,
+    url: string,
+}
+
+type State = {}
+
+export default class StoryContainer extends Component<Props, State> {
     render() {
         return(
             <Story
@@ -15,5 +26,3 @@ class StoryContainer extends Component {
         )
     }
 }
-
-export default StoryContainer;
