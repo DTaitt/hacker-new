@@ -34,59 +34,47 @@ export default class StoryListContainer extends Component<Props, State> {
     state = {
         topStories: [],
     }
-    
-    // handleStoryFilter = this.handleStoryFilter.bind(this);
-    // fetchStories = this.fetchStories.bind(this);
 
     componentDidMount() {
         this.fetchStories();
     }
 
-    // handleStoryFilter(fValue) {
-    //     console.log(`${fValue} is what handleStoryFilter sees`);
-        
-    //     this.setState({
-    //         filterValue: fValue,
-    //     }, () => {
-    //         console.log(`${this.state.filterValue} is the filterValue state`)
-    //     })
-        
-    //     switch(fValue) {
-    //         case 'new':
-    //             this.fetchStories('new');
+    // handleStoryFilter(storyType) {
+    //     console.log(storyType)
+    //     switch(storyType) {
+    //         case 'top':
+    //             this.fetchStories('top');
     //             break;
-    //         default:
-    //             this.fetchStories('top')
     //     }
     // }
 
-    fetchStories() {
-        fetch(`https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`)
-            .then(res => {
-                return res.json()
-            })
-            .then(jsonRes => {
-                //console.log(jsonRes)
-                jsonRes.forEach((id: number) => {
-                    fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
-                        .then((storyRes) => {
-                            return storyRes.json()
-                        })
-                        .then((storyJson: storyJson) => {
-                            //console.log(storyJson)
-                            storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm")
-                            this.setState((prevState) => ({
-                                topStories: [...prevState.topStories, storyJson]
-                            }))
-                        })
-                })
-            })
+    async fetchStories(storyType = 'top') {
+        try {
+            let res = await fetch(`https://hacker-news.firebaseio.com/v0/${storyType}stories.json?print=pretty`);
+            let storyIDs = await res.json();  
+            //console.log(storyIDs); 
+            for (let id of storyIDs) {
+                let storyRes = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
+                let storyJson = await storyRes.json();
+                //console.log(storyJson);
+                storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm");
+                this.setState((prevState) => ({
+                    topStories: [...prevState.topStories, storyJson]
+                }))    
+            }        
+        }
+        catch (err) {
+            console.log(`Error: ${err.stack}`);
+        }
     }
     
     render() {
         return(
             <div>
-                {/*<StoryFilter handleStoryFilter = { this.handleStoryFilter } fetchStories = { this.fetchStories } /> */}
+                {/* <StoryFilter 
+                    handleStoryFilter = { this.handleStoryFilter } 
+                    fetchStories = { this.fetchStories } 
+                />  */}
                 <StoryList 
                     topStories = { this.state.topStories }
                 />
