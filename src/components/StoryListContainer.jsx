@@ -5,16 +5,16 @@ import moment from 'moment';
 import StoryList from './StoryList';
 import StoryFilter from './StoryFilter';
 
-// topStories prop doesn't hold type
-//may not need filterValue state. should rerender when storyfilter state.value changes
-//move handleStoryFilter from componentDidMount
-
 type Props = {
-    topStories: Object[],
+    stories: Object[],
+    newStories: Object[],
 };
 
 type State = {
+    storyType: string,
     topStories: Object[],
+    newStories: Object[],
+    bestStories: Object[],
 };
 
 type storyJson = {
@@ -32,23 +32,23 @@ type storyJson = {
 export default class StoryListContainer extends Component<Props, State> {
         
     state = {
+        storyType: '',
         topStories: [],
+        newStories: [],
+        bestStories: [],
     }
 
-    componentDidMount() {
-        this.fetchStories();
+    fetchStories = this.fetchStories.bind(this);
+    handleStoryFilter = this.handleStoryFilter.bind(this);
+
+    handleStoryFilter(storyType:string) {
+        //console.log(storyType)
+        this.setState({
+            storyType: storyType,
+        }, () => { this.fetchStories(storyType) })
     }
 
-    // handleStoryFilter(storyType) {
-    //     console.log(storyType)
-    //     switch(storyType) {
-    //         case 'top':
-    //             this.fetchStories('top');
-    //             break;
-    //     }
-    // }
-
-    async fetchStories(storyType = 'top') {
+    async fetchStories(storyType:string) {
         try {
             let res = await fetch(`https://hacker-news.firebaseio.com/v0/${storyType}stories.json?print=pretty`);
             let storyIDs = await res.json();  
@@ -58,10 +58,21 @@ export default class StoryListContainer extends Component<Props, State> {
                 let storyJson = await storyRes.json();
                 //console.log(storyJson);
                 storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm");
-                this.setState((prevState) => ({
-                    topStories: [...prevState.topStories, storyJson]
-                }))    
-            }        
+
+                if((storyType === 'top') && (this.state.topStories.length < 10)) {
+                    this.setState((prevState) => ({
+                        topStories: [...prevState.topStories, storyJson]
+                    })) 
+                } else if((storyType === 'new') && (this.state.newStories.length < 10)) {
+                    this.setState((prevState) => ({
+                        newStories: [...prevState.newStories, storyJson]
+                    })) 
+                } else if((storyType === 'best') && (this.state.bestStories.length < 10)) {
+                    this.setState((prevState) => ({
+                        bestStories: [...prevState.bestStories, storyJson]
+                    })) 
+                }
+            }             
         }
         catch (err) {
             console.log(`Error: ${err.stack}`);
@@ -69,15 +80,28 @@ export default class StoryListContainer extends Component<Props, State> {
     }
     
     render() {
+        console.log(this.state)
+
+        let storyList = null;
+        switch(this.state.storyType) {
+            case 'top':
+                storyList = <StoryList stories = { this.state.topStories } />
+                break;
+            case 'new':
+                storyList = <StoryList stories = { this.state.newStories } />
+                break;  
+            case 'best':
+                storyList = <StoryList stories = { this.state.bestStories } />
+                break;        
+        }
+
         return(
             <div>
-                {/* <StoryFilter 
+                <StoryFilter 
                     handleStoryFilter = { this.handleStoryFilter } 
                     fetchStories = { this.fetchStories } 
-                />  */}
-                <StoryList 
-                    topStories = { this.state.topStories }
-                />
+                /> 
+                { storyList }
             </div>     
         );
     }

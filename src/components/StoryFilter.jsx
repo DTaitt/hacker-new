@@ -1,7 +1,17 @@
+// @flow
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class StoryFilter extends Component {
+
+type Props = {
+    handleStoryFilter(storyType:string): string,
+};
+
+type State = {
+    value: string,
+};
+
+export default class StoryFilter extends Component<Props, State> {
 
     state = {
         value: "top",
@@ -9,15 +19,11 @@ export default class StoryFilter extends Component {
 
     handleChange = this.handleChange.bind(this);
 
-    //   componentDidMount() {
-    //     this.props.handleStoryFilter(this.state.value);
-    //   }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextState.value !== this.state.value;
-    // }
+    componentDidMount() {
+        this.props.handleStoryFilter(this.state.value);
+    }
     
-    handleChange(e) {
+    handleChange(e:any) {
         this.setState({
             value: e.target.value
         }, () => { this.props.handleStoryFilter(this.state.value); console.log(this.state.value)});

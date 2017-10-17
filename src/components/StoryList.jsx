@@ -4,7 +4,7 @@ import React from 'react';
 import StoryContainer from './StoryContainer';
 
 type Props = {
-    topStories: Object[],
+    stories: Object[],
 }
 
 type story = {
@@ -23,7 +23,7 @@ export default function StoryList(props: Props) {
     return(
         <section className = "story-list">
             {   
-                props.topStories.slice(5, 10).map((story: story) => {
+                props.stories.slice(5, 10).map((story: story) => {
                     return (<StoryContainer 
                         key = { story.id }
                         title = { story.title } 
