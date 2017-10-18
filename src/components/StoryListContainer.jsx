@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import StoryList from './StoryList';
 import StoryFilter from './StoryFilter';
+import StoryList from './StoryList';
 
 type Props = {
     stories: Object[],
@@ -41,13 +41,6 @@ export default class StoryListContainer extends Component<Props, State> {
     fetchStories = this.fetchStories.bind(this);
     handleStoryFilter = this.handleStoryFilter.bind(this);
 
-    handleStoryFilter(storyType:string) {
-        //console.log(storyType)
-        this.setState({
-            storyType: storyType,
-        }, () => { this.fetchStories(storyType) })
-    }
-
     async fetchStories(storyType:string) {
         try {
             let res = await fetch(`https://hacker-news.firebaseio.com/v0/${storyType}stories.json?print=pretty`);
@@ -78,9 +71,16 @@ export default class StoryListContainer extends Component<Props, State> {
             console.log(`Error: ${err.stack}`);
         }
     }
+
+    handleStoryFilter(storyType:string) {
+        //console.log(storyType)
+        this.setState({
+            storyType: storyType,
+        }, () => { this.fetchStories(storyType) })
+    }  
     
     render() {
-        console.log(this.state)
+        console.log(this.state.topStories)
 
         let storyList = null;
         switch(this.state.storyType) {
