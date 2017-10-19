@@ -1,10 +1,6 @@
-* {
-  font-family: 'Muli', sans-serif; }
-
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  padding: 0;
-  font-family: 'Ovo', serif; }
+  padding: 0; }
 
 a {
   text-decoration: none;
@@ -13,47 +9,8 @@ a {
 ul {
   list-style: none; }
 
-header nav a {
-  text-align: center; }
-
-div.form-group {
-  margin: 0;
-  padding: 0; }
-
-section.story-list {
-  background: orangered;
-  padding: 1vw; }
-
-div.story {
-  background: #e4d2ba;
-  margin: 1vw;
-  padding: 1vw;
-  height: 100vw; }
-  div.story h2 {
-    margin: 3vw 1vw; }
-  div.story p {
-    margin: 2vw 1vw;
-    font-size: 6vw; }
-
-@media only screen and (min-width: 321px) {
-  div.story h2 {
-    margin: 5vw 1vw;
-    font-size: 9vw; }
-  div.story p {
-    font-size: 6vw; } }
-
-@media only screen and (min-width: 426px) {
-  section.story-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; }
-  div.story {
-    height: 47vw;
-    width: 47vw;
-    margin: 1vw; }
-    div.story h2 {
-      margin: 1vw;
-      font-size: 4vw;
-      line-height: 4vw; }
-    div.story p {
-      font-size: 2.5vw; } }
+.story {
+  background: sandybrown;
+  margin: 5px; }
+  .story p {
+    margin: 2px 0; }
