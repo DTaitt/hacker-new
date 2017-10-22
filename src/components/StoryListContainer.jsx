@@ -32,7 +32,7 @@ type storyJson = {
 export default class StoryListContainer extends Component<Props, State> {
         
     state = {
-        storyType: '',
+        storyType: 'top',
         topStories: [],
         newStories: [],
         bestStories: [],
@@ -48,7 +48,7 @@ export default class StoryListContainer extends Component<Props, State> {
             //console.log(storyIDs); 
             for (let id of storyIDs) {
                 let storyRes = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
-                let storyJson = await storyRes.json();
+                let storyJson:storyJson = await storyRes.json();
                 //console.log(storyJson);
                 storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm");
 
@@ -76,11 +76,13 @@ export default class StoryListContainer extends Component<Props, State> {
         //console.log(storyType)
         this.setState({
             storyType: storyType,
-        }, () => { this.fetchStories(storyType) })
+        }, () => { 
+            this.fetchStories(storyType) 
+        })
     }  
     
     render() {
-        console.log(this.state.topStories)
+        //console.log(this.state.topStories)
 
         let storyList = null;
         switch(this.state.storyType) {
@@ -92,7 +94,9 @@ export default class StoryListContainer extends Component<Props, State> {
                 break;  
             case 'best':
                 storyList = <StoryList stories = { this.state.bestStories } />
-                break;        
+                break;  
+            default:
+                storyList = <StoryList stories = { this.state.topStories } />          
         }
 
         return(
