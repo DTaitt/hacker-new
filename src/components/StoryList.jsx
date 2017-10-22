@@ -23,7 +23,7 @@ export default function StoryList(props: Props) {
     return(
         <section className = "story-list">
             {   
-                props.stories.slice(5, 10).map((story: story) => {
+                props.stories.map((story: story) => {
                     return (<StoryContainer 
                         key = { story.id }
                         title = { story.title } 

@@ -19,30 +19,51 @@ ul {
 }
 
 // Header
-
-header nav a {
-  text-align: center;
+header nav div.container{
+  font-size: 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  div.navbar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  ul.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 // StoryFilter
 div.form-group {
   margin: 0;
   padding: 0;
+  font-size: 6vw;
+  text-align: center;
+  #story-filter {
+    height: 12vw;
+  }
 }
 
 // StoryList
-
 section.story-list {
-  background: orangered;
+  background: rgb(255,106,50);
   padding: 1vw;
 }
 
 // Story
 div.story {
-  background: rgb(228, 210, 186);
-  margin: 1vw;
+  background: rgb(241,233,221);
+  margin: 1vw 1vw 2vw 1vw;
   padding: 1vw;
-  height: 100vw;
+  min-height: 100vw;
   h2 {
     margin: 3vw 1vw;
   }
@@ -54,10 +75,19 @@ div.story {
 
 @media only screen and (min-width: 321px) {
   
+  // StoryFilter
+  div.form-group {
+    font-size: 5vw;
+    #story-filter {
+      height: 12vw;
+    }
+  }
+
+  // Story
   div.story {
     h2 {
-      margin: 5vw 1vw;
-      font-size: 9vw;
+      margin: 1vw;
+      font-size: 8vw;
     }
     p {
       font-size: 6vw;
@@ -68,23 +98,131 @@ div.story {
 
 @media only screen and (min-width: 426px) {
   
+  // Header
+  header nav div.container {
+    font-size: 3vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    ul.navbar-nav {
+      margin-left: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+    }
+  }
+
+  // StoryFilter
+  div.form-group {
+    font-size: 3vw;
+    #story-filter {
+      height: 6vw;
+    }
+  }
+
+  // StoryList
   section.story-list {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
   }
 
+  //Story
   div.story {
+    min-height: initial;
     height: 47vw;
     width: 47vw;
     margin: 1vw;
     h2 {
       margin: 1vw;
-      font-size: 4vw;
-      line-height: 4vw;
+      font-size: 3.5vw;
+      line-height: 5vw;
     }
     p {
+      font-size: 2.2vw;
+    }
+  }
+
+}
+
+@media only screen and (min-width: 769px) {
+  
+  // Header
+  header nav div.container {
+    font-size: 2.6vw;
+  }
+
+  // StoryFilter
+  div.form-group {
+    font-size: 2.5vw;
+    #story-filter {
+      height: 4vw;
+      width: 80vw;
+      margin: 0 auto 2vw;
+    }
+  }
+
+  // StoryList
+  section.story-list {
+    padding: 1vw;
+  }
+
+  //Story
+  div.story {
+    height: 31.5vw;
+    width: 31.5vw;
+    margin: .5vw;
+    padding: .3vw;
+    h2 {
+      margin: 1.2vw .5vw;
       font-size: 2.5vw;
+      line-height: 2.9vw;
+    }
+    p {
+      margin: 1vw .5vw;
+      font-size: 1.8vw;
+      line-height: 1.5vw;
+    }
+  }
+
+}
+@media only screen and (min-width: 1025px) {
+  
+  // Header
+  header nav div.container {
+    font-size: 1.7vw;
+  }
+
+  // StoryFilter
+  div.form-group {
+    font-size: 1.6vw;
+    #story-filter {
+      height: 3vw;
+      width: 85vw;
+      margin: 1vw auto 2vw;
+    }
+  }
+
+  // StoryList
+  section.story-list {
+    padding: 1vw 6vw;
+  }
+
+  //Story
+  div.story {
+    height: 27.5vw;
+    width: 27.5vw;
+    margin: .5vw;
+    padding: .3vw;
+    h2 {
+      margin: 1.2vw .5vw;
+      font-size: 2.2vw;
+      line-height: 2.9vw;
+    }
+    p {
+      margin: 1vw .5vw;
+      font-size: 1.5vw;
+      line-height: 1.5vw;
     }
   }
 

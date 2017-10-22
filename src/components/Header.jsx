@@ -15,8 +15,8 @@ export default function Header() {
                     </Navbar.Brand>    
                 </Navbar.Header>
                 <Nav>
-                    <LinkContainer to="/favorite">
-                        <NavItem eventKey = { 1 } >Favorite</NavItem>
+                    <LinkContainer to="/favorites">
+                        <NavItem eventKey = { 1 } >Favorites</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/history">
                     <NavItem eventKey = { 2 } >History</NavItem>

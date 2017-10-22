@@ -13,22 +13,41 @@ a {
 ul {
   list-style: none; }
 
-header nav a {
-  text-align: center; }
+header nav div.container {
+  font-size: 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  header nav div.container div.navbar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    header nav div.container div.navbar-header a {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+  header nav div.container ul.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
 
 div.form-group {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-size: 6vw;
+  text-align: center; }
+  div.form-group #story-filter {
+    height: 12vw; }
 
 section.story-list {
-  background: orangered;
+  background: #ff6a32;
   padding: 1vw; }
 
 div.story {
-  background: #e4d2ba;
-  margin: 1vw;
+  background: #f1e9dd;
+  margin: 1vw 1vw 2vw 1vw;
   padding: 1vw;
-  height: 100vw; }
+  min-height: 100vw; }
   div.story h2 {
     margin: 3vw 1vw; }
   div.story p {
@@ -36,24 +55,93 @@ div.story {
     font-size: 6vw; }
 
 @media only screen and (min-width: 321px) {
+  div.form-group {
+    font-size: 5vw; }
+    div.form-group #story-filter {
+      height: 12vw; }
   div.story h2 {
-    margin: 5vw 1vw;
-    font-size: 9vw; }
+    margin: 1vw;
+    font-size: 8vw; }
   div.story p {
     font-size: 6vw; } }
 
 @media only screen and (min-width: 426px) {
+  header nav div.container {
+    font-size: 3vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; }
+    header nav div.container ul.navbar-nav {
+      margin-left: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end; }
+  div.form-group {
+    font-size: 3vw; }
+    div.form-group #story-filter {
+      height: 6vw; }
   section.story-list {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap; }
   div.story {
+    min-height: initial;
     height: 47vw;
     width: 47vw;
     margin: 1vw; }
     div.story h2 {
       margin: 1vw;
-      font-size: 4vw;
-      line-height: 4vw; }
+      font-size: 3.5vw;
+      line-height: 5vw; }
     div.story p {
-      font-size: 2.5vw; } }
+      font-size: 2.2vw; } }
+
+@media only screen and (min-width: 769px) {
+  header nav div.container {
+    font-size: 2.6vw; }
+  div.form-group {
+    font-size: 2.5vw; }
+    div.form-group #story-filter {
+      height: 4vw;
+      width: 80vw;
+      margin: 0 auto 2vw; }
+  section.story-list {
+    padding: 1vw; }
+  div.story {
+    height: 31.5vw;
+    width: 31.5vw;
+    margin: .5vw;
+    padding: .3vw; }
+    div.story h2 {
+      margin: 1.2vw .5vw;
+      font-size: 2.5vw;
+      line-height: 2.9vw; }
+    div.story p {
+      margin: 1vw .5vw;
+      font-size: 1.8vw;
+      line-height: 1.5vw; } }
+
+@media only screen and (min-width: 1025px) {
+  header nav div.container {
+    font-size: 1.7vw; }
+  div.form-group {
+    font-size: 1.6vw; }
+    div.form-group #story-filter {
+      height: 3vw;
+      width: 85vw;
+      margin: 1vw auto 2vw; }
+  section.story-list {
+    padding: 1vw 6vw; }
+  div.story {
+    height: 27.5vw;
+    width: 27.5vw;
+    margin: .5vw;
+    padding: .3vw; }
+    div.story h2 {
+      margin: 1.2vw .5vw;
+      font-size: 2.2vw;
+      line-height: 2.9vw; }
+    div.story p {
+      margin: 1vw .5vw;
+      font-size: 1.5vw;
+      line-height: 1.5vw; } }
