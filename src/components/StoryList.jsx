@@ -19,18 +19,22 @@ type story = {
     url: string,
 }
 
-export default function StoryList(props: Props) {
+export default function StoryList({stories, addToFavorites}) {
+    // console.log(stories)
+    // console.log(addToFavorites)
     return(
         <section className = "story-list">
             {   
-                props.stories.map((story: story) => {
+                stories.map((story: story) => {
                     return (<StoryContainer 
                         key = { story.id }
+                        id = { story.id }
                         title = { story.title } 
                         by = { story.by } 
                         score = { story.score }
                         time = { story.time }
-                        url = { story.url }  
+                        url = { story.url } 
+                        addToFavorites = { addToFavorites }
                     />)
                 })
             }

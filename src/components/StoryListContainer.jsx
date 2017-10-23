@@ -50,6 +50,7 @@ export default class StoryListContainer extends Component<Props, State> {
     }
 
     fetchStories = this.fetchStories.bind(this);
+    addToFavorites = this.addToFavorites.bind(this);
 
     async fetchStories(storyType) {
         try {
@@ -81,30 +82,40 @@ export default class StoryListContainer extends Component<Props, State> {
             console.log(`Error: ${err.stack}`);
         }
     }  
+
+    addToFavorites(favStory) {
+        if(this.state.favStories.indexOf(favStory) === -1) {
+            this.setState((prevState) => ({
+                favStories: [...prevState.favStories, favStory]
+            }))
+        }        
+    }
     
     render() {
         // console.log(this.props.storyType)
-        // console.log(this.state)
+        // console.log(this.addToFavorites)
+        console.log(this.state.favStories)
         // this.fetchStories(this.props.storyType)
 
         let storyList = null;
         switch(this.props.storyType) {
             case 'top':
-                storyList = <StoryList stories = { this.state.topStories } />
+                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.addToFavorites } />
                 break;
             case 'new':
-                storyList = <StoryList stories = { this.state.newStories } />
+                storyList = <StoryList stories = { this.state.newStories } addToFavorites = { this.addToFavorites } />
                 break;  
             case 'best':
-                storyList = <StoryList stories = { this.state.bestStories } />
+                storyList = <StoryList stories = { this.state.bestStories } addToFavorites = { this.addToFavorites } />
                 break;  
             default:
-                storyList = <StoryList stories = { this.state.topStories } />          
+                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.addToFavorites } />          
         }
 
         return(
             <div>
                 { storyList }
+                <StoryList stories = { this.state.favStories } />
             </div>     
         );
     }
