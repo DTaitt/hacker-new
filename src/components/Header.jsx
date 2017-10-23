@@ -18,9 +18,6 @@ export default function Header() {
                     <LinkContainer to="/favorites">
                         <NavItem eventKey = { 1 } >Favorites</NavItem>
                     </LinkContainer>
-                    <LinkContainer to="/history">
-                    <NavItem eventKey = { 2 } >History</NavItem>
-                </LinkContainer>
                 </Nav>
             </Navbar>
         </header>

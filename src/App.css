@@ -47,12 +47,21 @@ div.story {
   background: #f1e9dd;
   margin: 1vw 1vw 2vw 1vw;
   padding: 1vw;
-  min-height: 100vw; }
+  min-height: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
   div.story h2 {
     margin: 3vw 1vw; }
   div.story p {
     margin: 2vw 1vw;
     font-size: 6vw; }
+  div.story div.interaction {
+    display: flex;
+    justify-content: space-around; }
+    div.story div.interaction * {
+      font-size: 8vw;
+      padding: 2vw 1vw; }
 
 @media only screen and (min-width: 321px) {
   div.form-group {

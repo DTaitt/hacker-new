@@ -24,11 +24,7 @@ export default class StoryFilter extends Component<Props, State> {
     }
     
     handleChange(e:any) {
-        this.setState({
-            value: e.target.value
-        }, () => { 
-            this.props.handleStoryFilter(this.state.value) 
-        });
+        this.props.handleStoryFilter(e.target.value) 
     }
 
     render() {

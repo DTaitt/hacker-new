@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
-import StoryListContainer from './components/StoryListContainer';
+import Main from './components/Main';
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-          <StoryListContainer />
+          <Main />
         </div>
       </Router>
     );

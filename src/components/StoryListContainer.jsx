@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import StoryFilter from './StoryFilter';
 import StoryList from './StoryList';
 
 type Props = {
@@ -15,6 +14,7 @@ type State = {
     topStories: Object[],
     newStories: Object[],
     bestStories: Object[],
+    favStories: Object[],
 };
 
 type storyJson = {
@@ -36,12 +36,22 @@ export default class StoryListContainer extends Component<Props, State> {
         topStories: [],
         newStories: [],
         bestStories: [],
+        favStories: [],
+    }
+
+    componentDidMount() {
+        this.fetchStories(this.props.storyType)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.storyType !== nextProps.storyType) {
+            this.fetchStories(nextProps.storyType)
+        }
     }
 
     fetchStories = this.fetchStories.bind(this);
-    handleStoryFilter = this.handleStoryFilter.bind(this);
 
-    async fetchStories(storyType:string) {
+    async fetchStories(storyType) {
         try {
             let res = await fetch(`https://hacker-news.firebaseio.com/v0/${storyType}stories.json?print=pretty`);
             let storyIDs = await res.json();  
@@ -70,22 +80,15 @@ export default class StoryListContainer extends Component<Props, State> {
         catch (err) {
             console.log(`Error: ${err.stack}`);
         }
-    }
-
-    handleStoryFilter(storyType:string) {
-        //console.log(storyType)
-        this.setState({
-            storyType: storyType,
-        }, () => { 
-            this.fetchStories(storyType) 
-        })
     }  
     
     render() {
-        //console.log(this.state.topStories)
+        // console.log(this.props.storyType)
+        // console.log(this.state)
+        // this.fetchStories(this.props.storyType)
 
         let storyList = null;
-        switch(this.state.storyType) {
+        switch(this.props.storyType) {
             case 'top':
                 storyList = <StoryList stories = { this.state.topStories } />
                 break;
@@ -101,10 +104,6 @@ export default class StoryListContainer extends Component<Props, State> {
 
         return(
             <div>
-                <StoryFilter 
-                    handleStoryFilter = { this.handleStoryFilter } 
-                    fetchStories = { this.fetchStories } 
-                /> 
                 { storyList }
             </div>     
         );
