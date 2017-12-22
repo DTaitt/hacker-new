@@ -50,7 +50,7 @@ export default class StoryListContainer extends Component<Props, State> {
     }
 
     fetchStories = this.fetchStories.bind(this);
-    addToFavorites = this.addToFavorites.bind(this);
+    // addToFavorites = this.addToFavorites.bind(this);
 
     async fetchStories(storyType) {
         try {
@@ -83,33 +83,36 @@ export default class StoryListContainer extends Component<Props, State> {
         }
     }  
 
-    addToFavorites(favStory) {
-        if(this.state.favStories.indexOf(favStory) === -1) {
-            this.setState((prevState) => ({
-                favStories: [...prevState.favStories, favStory]
-            }))
-        }        
-    }
+    // addToFavorites(favStory) {
+    //     if(this.state.favStories.indexOf(favStory) === -1) {
+    //         this.setState((prevState) => ({
+    //             favStories: [...prevState.favStories, favStory]
+    //         }))
+    //     }        
+    // }
     
     render() {
         // console.log(this.props.storyType)
         // console.log(this.addToFavorites)
-        console.log(this.state.favStories)
+        // console.log(this.state.favStories)
         // this.fetchStories(this.props.storyType)
 
         let storyList = null;
         switch(this.props.storyType) {
             case 'top':
-                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.addToFavorites } />
+                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } />
                 break;
             case 'new':
-                storyList = <StoryList stories = { this.state.newStories } addToFavorites = { this.addToFavorites } />
+                storyList = <StoryList stories = { this.state.newStories } addToFavorites = { this.props.addToFavorites } />
                 break;  
             case 'best':
-                storyList = <StoryList stories = { this.state.bestStories } addToFavorites = { this.addToFavorites } />
+                storyList = <StoryList stories = { this.state.bestStories } addToFavorites = { this.props.addToFavorites } />
+                break;  
+            case 'fav':
+                storyList = <StoryList stories = { this.props.favStories } addToFavorites = { this.props.addToFavorites } />
                 break;  
             default:
-                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.addToFavorites } />          
+                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } />          
         }
 
         return(
