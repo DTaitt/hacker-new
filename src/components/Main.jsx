@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 // import Home from './pages/Home';
 import StoryFilter from './StoryFilter';
 import StoryListContainer from './StoryListContainer';
+import Search from './Search';
 
 export default class Main extends Component {
 
@@ -39,6 +40,7 @@ export default class Main extends Component {
         console.log(this.state.favStories)
         return(
             <main>
+                <Search />
                 <Switch>
                     <Route exact path='/' render = {(props) => (
                         <div>

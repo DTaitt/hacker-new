@@ -40,7 +40,10 @@ export default class StoryListContainer extends Component<Props, State> {
     }
 
     componentDidMount() {
-        this.fetchStories(this.props.storyType)
+        //stops app from trying to fetch 'favorite stories' from Hacker News API
+        if (this.props.storyType !== 'fav') {
+            this.fetchStories(this.props.storyType)
+        }       
     }
 
     componentWillReceiveProps(nextProps) {
