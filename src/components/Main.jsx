@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 // import Home from './pages/Home';
 import StoryFilter from './StoryFilter';
 import StoryListContainer from './StoryListContainer';
-import Favorites from './pages/Favorites';
 
 export default class Main extends Component {
 
@@ -27,6 +26,12 @@ export default class Main extends Component {
             this.setState((prevState) => ({
                 favStories: [...prevState.favStories, favStory]
             }))
+        } else {
+            this.setState((prevState) => ({
+                favStories: prevState.favStories.filter((story) => {
+                    return story !== favStory;
+                })
+            }))
         }        
     }
 
@@ -38,7 +43,7 @@ export default class Main extends Component {
                     <Route exact path='/' render = {(props) => (
                         <div>
                             <StoryFilter handleStoryFilter = { this.handleStoryFilter } />
-                            <StoryListContainer storyType = { this.state.storyType } addToFavorites = { this.addToFavorites} />
+                            <StoryListContainer storyType = { this.state.storyType } addToFavorites = { this.addToFavorites } />
                         </div>
                     )} />
                     <Route path='/favorites' render = {(props) => (
