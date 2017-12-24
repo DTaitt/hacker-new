@@ -19,7 +19,7 @@ type story = {
     url: string,
 }
 
-export default function StoryList({stories, addToFavorites}) {
+export default function StoryList({stories, addToFavorites, searchQuery}) {
     // console.log(stories)
     // console.log(addToFavorites)
     return(
@@ -35,6 +35,7 @@ export default function StoryList({stories, addToFavorites}) {
                         time = { story.time }
                         url = { story.url } 
                         addToFavorites = { addToFavorites }
+                        searchQuery = { searchQuery }
                     />)
                 })
             }

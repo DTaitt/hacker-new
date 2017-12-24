@@ -12,11 +12,14 @@ export default class Search extends Component {
     handleChange(e) {
         this.setState({
             value: e.target.value,
+        },() => {
+            this.props.handleSearch(this.state.value.toLowerCase())
         })
+        
     }
     
     render() {
-        console.log(this.state.value)
+        //console.log(this.state.value)
         return (
             <form>
                 <FormGroup>

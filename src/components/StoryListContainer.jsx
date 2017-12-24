@@ -69,7 +69,9 @@ export default class StoryListContainer extends Component<Props, State> {
                 if((storyType === 'top') && (this.state.topStories.length < 10)) {
                     this.setState((prevState) => ({
                         topStories: [...prevState.topStories, storyJson]
-                    })) 
+                    }), () => {
+                        console.log(storyJson.title.split(' '))
+                    }) 
                 } else if((storyType === 'new') && (this.state.newStories.length < 10)) {
                     this.setState((prevState) => ({
                         newStories: [...prevState.newStories, storyJson]
@@ -99,29 +101,71 @@ export default class StoryListContainer extends Component<Props, State> {
         // console.log(this.addToFavorites)
         // console.log(this.state.favStories)
         // this.fetchStories(this.props.storyType)
+        //console.log(this.state.topStories)
 
-        let storyList = null;
+        let filteredStoryList = null;
+        // switch(this.props.storyType) {
+        //     case 'top':
+        //         filteredStoryList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } searchQuery = { this.props.searchQuery } />
+        //         break;
+        //     case 'new':
+        //         filteredStoryList = <StoryList stories = { this.state.newStories } addToFavorites = { this.props.addToFavorites } />
+        //         break;  
+        //     case 'best':
+        //         filteredStoryList = <StoryList stories = { this.state.bestStories } addToFavorites = { this.props.addToFavorites } />
+        //         break;  
+        //     case 'fav':
+        //         filteredStoryList = <StoryList stories = { this.props.favStories } addToFavorites = { this.props.addToFavorites } />
+        //         break;  
+        //     default:
+        //         filteredStoryList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } />          
+        // }
+
+        let stories = null;
+
         switch(this.props.storyType) {
             case 'top':
-                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } />
+                stories = this.state.topStories  
                 break;
             case 'new':
-                storyList = <StoryList stories = { this.state.newStories } addToFavorites = { this.props.addToFavorites } />
+                stories = this.state.newStories  
                 break;  
             case 'best':
-                storyList = <StoryList stories = { this.state.bestStories } addToFavorites = { this.props.addToFavorites } />
+                stories = this.state.bestStories  
                 break;  
             case 'fav':
-                storyList = <StoryList stories = { this.props.favStories } addToFavorites = { this.props.addToFavorites } />
+                stories = this.props.favStories  
                 break;  
             default:
-                storyList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } />          
+                stories = this.state.topStories            
         }
+
+        // console.log(this.props.searchQuery)
+
+        // function queryFilter(story) {
+        //     let titleArr = story.title.split(' ');
+        //     if (titleArr.indexOf(this.props.searchQuery) !== -1) {
+        //         return story;
+        //     }
+        // }
+
+        console.log(stories)
+        console.log(this.props.searchQuery)
+        if (this.props.searchQuery !== '') {
+            stories = stories.filter(
+                (story) => {
+                    console.log(story.title.split())
+                    return story.title.toLowerCase().split(' ').indexOf(this.props.searchQuery) !== -1
+                }
+            )
+        }
+        console.log(stories)
+        
 
         return(
             <div>
-                { storyList }
-                <StoryList stories = { this.state.favStories } />
+                {/* { filteredStoryList } */}
+                <StoryList stories = { stories } addToFavorites = { this.props.addToFavorites } />
             </div>     
         );
     }
