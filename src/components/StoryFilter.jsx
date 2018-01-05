@@ -7,25 +7,26 @@ type Props = {
     handleStoryFilter(storyType:string): string,
 };
 
-type State = {
-    value: string,
-};
+// type State = {
+//     value: string,
+// };
 
-export default class StoryFilter extends Component<Props, State> {
+export default class StoryFilter extends Component<Props> {
 
-    state = {
-        value: "top",
-    }
+    props: Props
+    // state = {
+    //     value: "top",
+    // }
 
-    handleChange = this.handleChange.bind(this);
+    // handleChange = this.handleChange.bind(this);
 
-    componentDidMount() {
-        this.props.handleStoryFilter(this.state.value);
-    }
+    // componentDidMount() {
+    //     this.props.handleStoryFilter(this.state.value);
+    // }
     
-    handleChange(e:any) {
-        this.props.handleStoryFilter(e.target.value) 
-    }
+    // handleChange(e:any) {
+    //     this.props.handleStoryFilter(e.target.value) 
+    // }
 
     render() {
         return(
@@ -33,7 +34,9 @@ export default class StoryFilter extends Component<Props, State> {
                 <ControlLabel>Pick your stories</ControlLabel>
                 <FormControl 
                     componentClass="select" 
-                    onChange = { this.handleChange }
+                    onChange = { (e) => { 
+                        this.props.handleStoryFilter(e.target.value) 
+                    } }
                 >
                     <option value = "top">Top Stories</option>
                     <option value = "new">New Stories</option>

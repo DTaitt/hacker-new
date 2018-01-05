@@ -1,37 +1,43 @@
+// @flow
 import { Switch, Route } from 'react-router-dom'
 import React, { Component } from 'react'
 
-// import Home from './pages/Home';
 import StoryFilter from './StoryFilter';
 import StoryListContainer from './StoryListContainer';
 import Search from './Search';
 
-export default class Main extends Component {
+type State = {
+    favStories: Object[],
+    searchQuery: string,
+    storyType: string,
+};
 
-    state = {
+export default class Main extends Component<void, State> {
+    
+    state: State = {
         favStories: [],
-        storyType: "top",
         searchQuery: '',
+        storyType: 'top'
     }
 
-    handleStoryFilter = this.handleStoryFilter.bind(this);
     handleSearch = this.handleSearch.bind(this)
+    handleStoryFilter = this.handleStoryFilter.bind(this);
     addToFavorites = this.addToFavorites.bind(this);
 
-    handleStoryFilter(storyType) {
-        this.setState({
-            storyType: storyType,
-        })
-    }
-
-    handleSearch(searchQuery) {
+    handleSearch(searchQuery: string) {
         this.setState({
             searchQuery: searchQuery,
         })
     }
 
-    addToFavorites(favStory) {
-        if(this.state.favStories.indexOf(favStory) === -1) {
+    handleStoryFilter(storyType: string) {
+        this.setState({
+            storyType: storyType,
+        })
+    }
+
+    addToFavorites(favStory: Object) {
+        if (this.state.favStories.indexOf(favStory) === -1) {
             this.setState((prevState) => ({
                 favStories: [...prevState.favStories, favStory]
             }))
@@ -41,27 +47,48 @@ export default class Main extends Component {
                     return story !== favStory;
                 })
             }))
-        }        
+        }
     }
 
     render() {
-        //console.log(this.state.favStories)
-        //console.log(this.state.searchQuery)
-        return(
+        let home = (props) => (
+            <div>
+                <StoryFilter
+                    handleStoryFilter={this.handleStoryFilter}
+                />
+                <StoryListContainer
+                    storyType={this.state.storyType}
+                    addToFavorites={this.addToFavorites}
+                    searchQuery={this.state.searchQuery}
+                />
+            </div>
+        )
+
+        let favorites = (props) => (
+            <div>
+                <StoryListContainer
+                    storyType='fav'
+                    addToFavorites={this.addToFavorites}
+                    searchQuery={this.state.searchQuery}
+                    favStories={this.state.favStories}
+                />
+            </div>
+        )
+
+        return (
             <main>
-                <Search handleSearch = { this.handleSearch } />
+                <Search
+                    handleSearch={this.handleSearch}
+                />
                 <Switch>
-                    <Route exact path='/' render = {(props) => (
-                        <div>
-                            <StoryFilter handleStoryFilter = { this.handleStoryFilter } />
-                            <StoryListContainer storyType = { this.state.storyType } addToFavorites = { this.addToFavorites } searchQuery = { this.state.searchQuery } />
-                        </div>
-                    )} />
-                    <Route path='/favorites' render = {(props) => (
-                        <div>
-                        <StoryListContainer storyType = "fav" favStories = { this.state.favStories } />
-                    </div>
-                    )}/>
+                    <Route
+                        exact path='/'
+                        render={home}
+                    />
+                    <Route
+                        exact path='/favorites'
+                        render={favorites}
+                    />
                 </Switch>
             </main>
         )

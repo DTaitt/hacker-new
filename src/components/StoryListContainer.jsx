@@ -5,12 +5,14 @@ import moment from 'moment';
 import StoryList from './StoryList';
 
 type Props = {
-    stories: Object[],
-    newStories: Object[],
+    storyType: string,
+    addToFavorites(favStory: Object): Object[],
+    searchQuery: string,
+    favStories?: Object[],
 };
 
 type State = {
-    storyType: string,
+    // storyType: string,
     topStories: Object[],
     newStories: Object[],
     bestStories: Object[],
@@ -30,9 +32,11 @@ type storyJson = {
 }
 
 export default class StoryListContainer extends Component<Props, State> {
-        
-    state = {
-        storyType: 'top',
+    
+    props: Props
+    
+    state: State = {
+        // storyType: 'top',
         topStories: [],
         newStories: [],
         bestStories: [],
@@ -42,11 +46,11 @@ export default class StoryListContainer extends Component<Props, State> {
     componentDidMount() {
         //stops app from trying to fetch 'favorite stories' from Hacker News API
         if (this.props.storyType !== 'fav') {
-            this.fetchStories(this.props.storyType)
+            this.fetchStories()
         }       
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: any) {
         if(this.props.storyType !== nextProps.storyType) {
             this.fetchStories(nextProps.storyType)
         }
@@ -55,7 +59,7 @@ export default class StoryListContainer extends Component<Props, State> {
     fetchStories = this.fetchStories.bind(this);
     // addToFavorites = this.addToFavorites.bind(this);
 
-    async fetchStories(storyType) {
+    async fetchStories(storyType: string = 'top') {
         try {
             let res = await fetch(`https://hacker-news.firebaseio.com/v0/${storyType}stories.json?print=pretty`);
             let storyIDs = await res.json();  
@@ -69,9 +73,7 @@ export default class StoryListContainer extends Component<Props, State> {
                 if((storyType === 'top') && (this.state.topStories.length < 10)) {
                     this.setState((prevState) => ({
                         topStories: [...prevState.topStories, storyJson]
-                    }), () => {
-                        console.log(storyJson.title.split(' '))
-                    }) 
+                    })) 
                 } else if((storyType === 'new') && (this.state.newStories.length < 10)) {
                     this.setState((prevState) => ({
                         newStories: [...prevState.newStories, storyJson]
@@ -88,40 +90,9 @@ export default class StoryListContainer extends Component<Props, State> {
         }
     }  
 
-    // addToFavorites(favStory) {
-    //     if(this.state.favStories.indexOf(favStory) === -1) {
-    //         this.setState((prevState) => ({
-    //             favStories: [...prevState.favStories, favStory]
-    //         }))
-    //     }        
-    // }
-    
     render() {
-        // console.log(this.props.storyType)
-        // console.log(this.addToFavorites)
-        // console.log(this.state.favStories)
-        // this.fetchStories(this.props.storyType)
-        //console.log(this.state.topStories)
-
-        let filteredStoryList = null;
-        // switch(this.props.storyType) {
-        //     case 'top':
-        //         filteredStoryList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } searchQuery = { this.props.searchQuery } />
-        //         break;
-        //     case 'new':
-        //         filteredStoryList = <StoryList stories = { this.state.newStories } addToFavorites = { this.props.addToFavorites } />
-        //         break;  
-        //     case 'best':
-        //         filteredStoryList = <StoryList stories = { this.state.bestStories } addToFavorites = { this.props.addToFavorites } />
-        //         break;  
-        //     case 'fav':
-        //         filteredStoryList = <StoryList stories = { this.props.favStories } addToFavorites = { this.props.addToFavorites } />
-        //         break;  
-        //     default:
-        //         filteredStoryList = <StoryList stories = { this.state.topStories } addToFavorites = { this.props.addToFavorites } />          
-        // }
-
-        let stories = null;
+        
+        let stories = this.state.topStories;
 
         switch(this.props.storyType) {
             case 'top':
@@ -140,33 +111,17 @@ export default class StoryListContainer extends Component<Props, State> {
                 stories = this.state.topStories            
         }
 
-        // console.log(this.props.searchQuery)
-
-        // function queryFilter(story) {
-        //     let titleArr = story.title.split(' ');
-        //     if (titleArr.indexOf(this.props.searchQuery) !== -1) {
-        //         return story;
-        //     }
-        // }
-
-        console.log(stories)
-        console.log(this.props.searchQuery)
-        if (this.props.searchQuery !== '') {
+        if (this.props.searchQuery !== '' && stories !== undefined) {
             stories = stories.filter(
-                (story) => {
+                (story: Object) => {
                     console.log(story.title.split())
                     return story.title.toLowerCase().split(' ').indexOf(this.props.searchQuery) !== -1
                 }
             )
         }
-        console.log(stories)
-        
 
         return(
-            <div>
-                {/* { filteredStoryList } */}
-                <StoryList stories = { stories } addToFavorites = { this.props.addToFavorites } />
-            </div>     
+            <StoryList stories = { stories } addToFavorites = { this.props.addToFavorites } />
         );
     }
 }

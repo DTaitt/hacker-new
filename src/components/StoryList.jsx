@@ -5,6 +5,7 @@ import StoryContainer from './StoryContainer';
 
 type Props = {
     stories: Object[],
+    addToFavorites(favStory: Object): Object[],
 }
 
 type story = {
@@ -19,13 +20,11 @@ type story = {
     url: string,
 }
 
-export default function StoryList({stories, addToFavorites, searchQuery}) {
-    // console.log(stories)
-    // console.log(addToFavorites)
+export default function StoryList(props: Props) {
     return(
         <section className = "story-list">
             {   
-                stories.map((story: story) => {
+                props.stories.map((story: story) => {
                     return (<StoryContainer 
                         key = { story.id }
                         id = { story.id }
@@ -34,8 +33,7 @@ export default function StoryList({stories, addToFavorites, searchQuery}) {
                         score = { story.score }
                         time = { story.time }
                         url = { story.url } 
-                        addToFavorites = { addToFavorites }
-                        searchQuery = { searchQuery }
+                        addToFavorites = { props.addToFavorites }
                     />)
                 })
             }
