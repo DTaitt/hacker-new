@@ -41,7 +41,9 @@ div.form-group {
 
 section.story-list {
   background: #ff6a32;
-  padding: 1vw; }
+  padding: 1vw;
+  margin: 1vw 0;
+  height: 100%; }
 
 div.story {
   background: #f1e9dd;

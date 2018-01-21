@@ -81,7 +81,7 @@ export default class StoryListContainer extends Component<Props, State> {
                         storyJson.id += 't';     
                 }
                 // console.log(storyJson);
-                storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm");
+                storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY h:mm A");
                 storyJson.isInFav =  false;
                 // console.log(storyJson)
                 this.props.handleStoryArrays(storyJson)
