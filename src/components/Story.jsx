@@ -37,7 +37,7 @@ export default class Story extends Component<Props, State> {
                             }) } 
                         }
                     ></span>
-                    <span className = 'glyphicon glyphicon-share'></span>
+                    {/* <span className = 'glyphicon glyphicon-share'></span> */}
                 </div>
             </div>
         )    

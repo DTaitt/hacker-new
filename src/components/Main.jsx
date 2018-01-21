@@ -15,13 +15,18 @@ type State = {
 export default class Main extends Component<void, State> {
     
     state: State = {
+        topStories: [],
+        newStories: [],
+        bestStories: [],
         favStories: [],
+        favStoryIDs: [],
         searchQuery: '',
         storyType: 'top'
     }
 
     handleSearch = this.handleSearch.bind(this)
     handleStoryFilter = this.handleStoryFilter.bind(this);
+    handleStoryArrays = this.handleStoryArrays.bind(this);
     addToFavorites = this.addToFavorites.bind(this);
 
     handleSearch(searchQuery: string) {
@@ -31,26 +36,61 @@ export default class Main extends Component<void, State> {
     }
 
     handleStoryFilter(storyType: string) {
-        this.setState({
+        this.setState(({
             storyType: storyType,
-        })
+        }))
     }
 
-    addToFavorites(favStory: Object) {
-        if (this.state.favStories.indexOf(favStory) === -1) {
+    handleStoryArrays(storyArr) {
+        if(this.state.storyType === 'top' && this.state.topStories.length < 30) {
             this.setState((prevState) => ({
-                favStories: [...prevState.favStories, favStory]
+                topStories: [...prevState.topStories, storyArr]
             }))
-        } else {
+        } else if(this.state.storyType === 'new' && this.state.newStories.length < 30) {
             this.setState((prevState) => ({
-                favStories: prevState.favStories.filter((story) => {
-                    return story !== favStory;
-                })
+                newStories: [...prevState.newStories, storyArr]
+            }))
+        } else if(this.state.storyType === 'best' && this.state.bestStories.length < 30) {
+            this.setState((prevState) => ({
+                bestStories: [...prevState.bestStories, storyArr]
             }))
         }
     }
 
+    addToFavorites(newFavStory: Object) {              
+        if (this.state.favStoryIDs.indexOf(newFavStory.id) === -1) {
+            this.setState((prevState) => ({
+                favStories: [...prevState.favStories, newFavStory],
+                favStoryIDs: [...prevState.favStoryIDs, newFavStory.id],
+            })
+            // ,() => {
+            //     console.log(this.state.favStoryIDs);
+            //     console.log(newFavStory.id)
+            //     console.log(this.state.favStories)
+            //     console.log(this.state.favStoryIDs.indexOf(newFavStory.id))
+            // }
+        )
+        } else {
+            this.setState((prevState) => ({
+                favStories: prevState.favStories.filter((favStory) => {
+                    return favStory.id !== newFavStory.id;
+                }),
+                favStoryIDs: prevState.favStoryIDs.filter((favStoryID) => {
+                    return favStoryID !== newFavStory.id;
+                })
+            })
+            // ,() => {
+            //     console.log(this.state.favStoryIDs);
+            //     console.log(newFavStory.id)
+            //     console.log(this.state.favStories)
+            //     console.log(this.state.favStoryIDs.indexOf(newFavStory.id))
+            // }
+        )         
+        }
+    }
+
     render() {
+        //console.log(this.state)
         let home = (props) => (
             <div>
                 <StoryFilter
@@ -58,8 +98,12 @@ export default class Main extends Component<void, State> {
                 />
                 <StoryListContainer
                     storyType={this.state.storyType}
+                    topStories={this.state.topStories}
+                    newStories={this.state.newStories}
+                    bestStories={this.state.bestStories}
                     addToFavorites={this.addToFavorites}
                     searchQuery={this.state.searchQuery}
+                    handleStoryArrays={this.handleStoryArrays}
                 />
             </div>
         )

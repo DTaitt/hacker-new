@@ -35,13 +35,13 @@ export default class StoryListContainer extends Component<Props, State> {
     
     props: Props
     
-    state: State = {
-        // storyType: 'top',
-        topStories: [],
-        newStories: [],
-        bestStories: [],
-        favStories: [],
-    }
+    // state: State = {
+    //     // storyType: 'top',
+    //     topStories: [],
+    //     newStories: [],
+    //     bestStories: [],
+    //     favStories: [],
+    // }
 
     componentDidMount() {
         //stops app from trying to fetch 'favorite stories' from Hacker News API
@@ -67,22 +67,25 @@ export default class StoryListContainer extends Component<Props, State> {
             for (let id of storyIDs) {
                 let storyRes = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
                 let storyJson:storyJson = await storyRes.json();
-                //console.log(storyJson);
-                storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm");
-
-                if((storyType === 'top') && (this.state.topStories.length < 10)) {
-                    this.setState((prevState) => ({
-                        topStories: [...prevState.topStories, storyJson]
-                    })) 
-                } else if((storyType === 'new') && (this.state.newStories.length < 10)) {
-                    this.setState((prevState) => ({
-                        newStories: [...prevState.newStories, storyJson]
-                    })) 
-                } else if((storyType === 'best') && (this.state.bestStories.length < 10)) {
-                    this.setState((prevState) => ({
-                        bestStories: [...prevState.bestStories, storyJson]
-                    })) 
+                switch(storyType) {
+                    case 'top':
+                        storyJson.id += 't';
+                        break;
+                    case 'new':
+                        storyJson.id += 'n';
+                        break;    
+                    case 'best':
+                        storyJson.id += 'b';
+                        break;
+                    default:
+                        storyJson.id += 't';     
                 }
+                // console.log(storyJson);
+                storyJson.time =  moment.unix(storyJson.time).format("MM.DD.YY HH:mm");
+                storyJson.isInFav =  false;
+                // console.log(storyJson)
+                this.props.handleStoryArrays(storyJson)
+
             }             
         }
         catch (err) {
@@ -92,30 +95,35 @@ export default class StoryListContainer extends Component<Props, State> {
 
     render() {
         
-        let stories = this.state.topStories;
+        let stories;
+        // console.log(this.props.storyType)
+        // console.log(this.props.handleStoryArrays)
+        // console.log(stories)
 
         switch(this.props.storyType) {
             case 'top':
-                stories = this.state.topStories  
+                stories = this.props.topStories  
                 break;
             case 'new':
-                stories = this.state.newStories  
+                stories = this.props.newStories  
                 break;  
             case 'best':
-                stories = this.state.bestStories  
+                stories = this.props.bestStories  
                 break;  
             case 'fav':
                 stories = this.props.favStories  
                 break;  
             default:
-                stories = this.state.topStories            
+                stories = this.props.topStories            
         }
+
+        // console.log(stories)
 
         if (this.props.searchQuery !== '' && stories !== undefined) {
             stories = stories.filter(
                 (story: Object) => {
-                    console.log(story.title.split())
-                    return story.title.toLowerCase().split(' ').indexOf(this.props.searchQuery) !== -1
+                    // console.log(story.title.split())
+                    return story.title.toLowerCase().indexOf(this.props.searchQuery) !== -1
                 }
             )
         }

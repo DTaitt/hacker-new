@@ -7,26 +7,13 @@ type Props = {
     handleStoryFilter(storyType:string): string,
 };
 
-// type State = {
-//     value: string,
-// };
-
 export default class StoryFilter extends Component<Props> {
 
     props: Props
-    // state = {
-    //     value: "top",
-    // }
 
-    // handleChange = this.handleChange.bind(this);
-
-    // componentDidMount() {
-    //     this.props.handleStoryFilter(this.state.value);
-    // }
-    
-    // handleChange(e:any) {
-    //     this.props.handleStoryFilter(e.target.value) 
-    // }
+    componentDidMount() {
+        this.props.handleStoryFilter('top') 
+    }
 
     render() {
         return(
