@@ -33,6 +33,6 @@ I also started using some newer ES features that I hadn't tried out yet. The big
 
 I started implementing Flow into this project but I haven't finished yet. It's definitely been a struggle but it forces me to be more considerate of the JavaScript that I'm writing. I also need to write my tests for this. In the future, I'm going to start writing my tests first instead.
 
-### Hacker New Version **2**
+**Hacker New Version** **_2.0_**
 
 I'm going to remake this in the future but I'm going to build it out in Typescript. I'm also going to use Redux to handle the state. I also want to build out a backend for it so that when a user saves a story as a favorite, it can be stored there instead of as state. I also want to add user auth on the backend. I haven't decided yet what backend I want to use. I'm leaning towards Express or Rails since I've used those before but I *really* want to try out Django.
