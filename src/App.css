@@ -166,9 +166,10 @@ div.story {
       width: 90vw;
       margin: 0 auto 2vw; }
   section.story-list {
-    padding: 1vw 6vw; }
+    padding: 1vw 6vw;
+    min-height: 90vh; }
   div.story {
-    min-height: 31.5vw;
+    height: 28.3vw;
     width: 28.3vw;
     margin: .5vw;
     padding: .3vw; }
