@@ -20,8 +20,11 @@ ul {
 }
 
 // Header
+//Height 15vh
+
 header nav.navbar-default {
   margin: 0;
+  height: 20vh;
 }
 
 header nav div.container{
@@ -53,20 +56,35 @@ header h1 {
   }  
 }
 // Search 
+//Height 5vh
+
 form.search div.form-group {
-  margin: -4vw 0 4vw;
+  label {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+  input {
+    height: 10vw;
+  }
 }
 
 // StoryFilter
+// Height 10vh
+
 main div.form-group label {
   margin: 2vw;
 }
-div.form-group {
-  margin: -4vw 0 4vw;
+div.form-group.story-filter {
+  margin: -4vw 0 2vw;
   padding: 0;
   font-size: 6vw;
   text-align: center;
-  #story-filter {
+  height: 14vh;
+  label {
+    font-weight: normal;
+  }
+  select {
     height: 12vw;
   }
 }
@@ -76,7 +94,7 @@ section.story-list {
   background: rgb(255,106,50);
   padding: 1vw;
   margin: 1vw 0;
-  height: 100%;
+  min-height: 70vh;
 }
 
 // Story
@@ -112,8 +130,12 @@ div.story {
 @media only screen and (min-width: 321px) {
 
   // Search 
+
+  form.search {
+    margin-top: 2vw;
+  }
   form.search div.form-group {
-    margin: -2vw 0 4vw;
+    // margin: -2vw 0 4vw;
     input {
       width: 95vw;
       margin: auto;
@@ -121,8 +143,9 @@ div.story {
   }
   
   // StoryFilter
-  div.form-group {
+  div.form-group.story-filter {
     font-size: 5vw;
+    margin: -4vw 0 1vw;
     #story-filter {
       height: 10vw;
       width: 95vw;
@@ -147,6 +170,11 @@ div.story {
 @media only screen and (min-width: 426px) {
   
   // Header
+
+  header nav.navbar-default {
+    height: 5vh;
+  }
+
   header nav div.container {
     font-size: 3vw;
     flex-direction: row;
@@ -160,11 +188,19 @@ div.story {
     }
   }
 
+  // Search
+  form.search div.form-group {
+    input {
+      height: 7vw;
+    }
+  }
+
   // StoryFilter
-  div.form-group {
+  div.form-group.story-filter {
+    margin: -4vw 0 4vw;
     font-size: 3vw;
     #story-filter {
-      height: 5vw;
+      height: 7.5vw;
     }
   }
 
@@ -200,7 +236,7 @@ div.story {
 
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 767px) {
   
   // Header
   header nav div.container {
@@ -211,12 +247,14 @@ div.story {
   form.search div.form-group {
     input {
       width: 90vw;
+      height: 4vw;
     }
   }
 
   // StoryFilter
-  div.form-group {
+  div.form-group.story-filter {
     font-size: 2.5vw;
+    margin: -4vw 0;
     #story-filter {
       height: 4vw;
       width: 90vw;
@@ -248,7 +286,7 @@ div.story {
   }
 
 }
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1024px) {
   
   // Header
   header nav div.container {
@@ -262,13 +300,15 @@ div.story {
     }
   }
 
-  // StoryFilter
-  div.form-group {
-    font-size: 1.6vw;
+  // // StoryFilter
+
+  div.form-group.story-filter {
+    font-size: 2.5vw;
+    margin: -4vw 0 1vw;
     #story-filter {
-      height: 3vw;
+      height: 4vw;
       width: 85vw;
-      margin: 1vw auto 2vw;
+      margin: 0 auto 2vw;
     }
   }
 
@@ -294,5 +334,50 @@ div.story {
       line-height: 1.5vw;
     }
   }
+
+}
+
+@media only screen and (min-width: 1440px) {
+
+  //Search
+  form.search div.form-group {
+    input {
+      height: 2.5vw;
+    }
+  }
+
+  // StoryFilter
+
+  div.form-group.story-filter {
+    font-size: 1.7vw;
+    margin: -2vw 0 2vw;
+    #story-filter {
+      height: 2.5vw;
+      margin: 0 auto 2vw;
+    }
+  }
+
+  //Story
+  div.story {
+    min-height: 20vw;
+    width: 20vw;
+    h2 {
+      margin: 1vw .2vw;
+      font-size: 2vw;
+      line-height: 2.5vw;
+    }
+    p {
+      font-size: 1.2vw;
+      line-height: 1.2vw;
+    }
+    div.interaction {
+      * {
+        font-size: 2vw;
+        padding: 1vw 0;
+      }
+    }
+  }
+
+  
 
 }

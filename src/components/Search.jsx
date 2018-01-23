@@ -33,7 +33,7 @@ export default class Search extends Component<Props, State> {
         return (
             <form className="search" >
                 <FormGroup>
-                    <ControlLabel></ControlLabel>
+                    <ControlLabel>Search</ControlLabel>
                     <FormControl
                         type='text'
                         value={this.state.value}

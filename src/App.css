@@ -15,7 +15,8 @@ ul {
   list-style: none; }
 
 header nav.navbar-default {
-  margin: 0; }
+  margin: 0;
+  height: 20vh; }
 
 header nav div.container {
   font-size: 6vw;
@@ -40,25 +41,34 @@ header h1 {
   header h1 span {
     color: #ff6a32; }
 
-form.search div.form-group {
-  margin: -4vw 0 4vw; }
+form.search div.form-group label {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px); }
+
+form.search div.form-group input {
+  height: 10vw; }
 
 main div.form-group label {
   margin: 2vw; }
 
-div.form-group {
-  margin: -4vw 0 4vw;
+div.form-group.story-filter {
+  margin: -4vw 0 2vw;
   padding: 0;
   font-size: 6vw;
-  text-align: center; }
-  div.form-group #story-filter {
+  text-align: center;
+  height: 14vh; }
+  div.form-group.story-filter label {
+    font-weight: normal; }
+  div.form-group.story-filter select {
     height: 12vw; }
 
 section.story-list {
   background: #ff6a32;
   padding: 1vw;
   margin: 1vw 0;
-  height: 100%; }
+  min-height: 70vh; }
 
 div.story {
   background: #f1e9dd;
@@ -84,14 +94,15 @@ div.story {
       padding: 2vw 1vw; }
 
 @media only screen and (min-width: 321px) {
-  form.search div.form-group {
-    margin: -2vw 0 4vw; }
-    form.search div.form-group input {
-      width: 95vw;
-      margin: auto; }
-  div.form-group {
-    font-size: 5vw; }
-    div.form-group #story-filter {
+  form.search {
+    margin-top: 2vw; }
+  form.search div.form-group input {
+    width: 95vw;
+    margin: auto; }
+  div.form-group.story-filter {
+    font-size: 5vw;
+    margin: -4vw 0 1vw; }
+    div.form-group.story-filter #story-filter {
       height: 10vw;
       width: 95vw;
       margin: auto; }
@@ -103,6 +114,8 @@ div.story {
     font-size: 5vw; } }
 
 @media only screen and (min-width: 426px) {
+  header nav.navbar-default {
+    height: 5vh; }
   header nav div.container {
     font-size: 3vw;
     flex-direction: row;
@@ -113,10 +126,13 @@ div.story {
       display: flex;
       flex-direction: row;
       align-items: flex-end; }
-  div.form-group {
+  form.search div.form-group input {
+    height: 7vw; }
+  div.form-group.story-filter {
+    margin: -4vw 0 4vw;
     font-size: 3vw; }
-    div.form-group #story-filter {
-      height: 5vw; }
+    div.form-group.story-filter #story-filter {
+      height: 7.5vw; }
   section.story-list {
     display: flex;
     justify-content: space-around;
@@ -136,14 +152,16 @@ div.story {
     div.story div.interaction * {
       font-size: 3vw; } }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 767px) {
   header nav div.container {
     font-size: 2.6vw; }
   form.search div.form-group input {
-    width: 90vw; }
-  div.form-group {
-    font-size: 2.5vw; }
-    div.form-group #story-filter {
+    width: 90vw;
+    height: 4vw; }
+  div.form-group.story-filter {
+    font-size: 2.5vw;
+    margin: -4vw 0; }
+    div.form-group.story-filter #story-filter {
       height: 4vw;
       width: 90vw;
       margin: 0 auto 2vw; }
@@ -163,17 +181,18 @@ div.story {
       font-size: 1.8vw;
       line-height: 2.5vw; } }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1024px) {
   header nav div.container {
     font-size: 1.7vw; }
   form.search div.form-group input {
     width: 85vw; }
-  div.form-group {
-    font-size: 1.6vw; }
-    div.form-group #story-filter {
-      height: 3vw;
+  div.form-group.story-filter {
+    font-size: 2.5vw;
+    margin: -4vw 0 1vw; }
+    div.form-group.story-filter #story-filter {
+      height: 4vw;
       width: 85vw;
-      margin: 1vw auto 2vw; }
+      margin: 0 auto 2vw; }
   section.story-list {
     padding: 1vw 6vw; }
   div.story {
@@ -189,3 +208,26 @@ div.story {
       margin: 1vw .5vw;
       font-size: 1.5vw;
       line-height: 1.5vw; } }
+
+@media only screen and (min-width: 1440px) {
+  form.search div.form-group input {
+    height: 2.5vw; }
+  div.form-group.story-filter {
+    font-size: 1.7vw;
+    margin: -2vw 0 2vw; }
+    div.form-group.story-filter #story-filter {
+      height: 2.5vw;
+      margin: 0 auto 2vw; }
+  div.story {
+    min-height: 20vw;
+    width: 20vw; }
+    div.story h2 {
+      margin: 1vw .2vw;
+      font-size: 2vw;
+      line-height: 2.5vw; }
+    div.story p {
+      font-size: 1.2vw;
+      line-height: 1.2vw; }
+    div.story div.interaction * {
+      font-size: 2vw;
+      padding: 1vw 0; } }

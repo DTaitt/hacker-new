@@ -17,7 +17,7 @@ export default class StoryFilter extends Component<Props> {
 
     render() {
         return(
-            <FormGroup controlId="story-filter">
+            <FormGroup className="story-filter" controlId="story-filter">
                 <ControlLabel>Pick your stories</ControlLabel>
                 <FormControl 
                     componentClass="select" 
