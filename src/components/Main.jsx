@@ -42,15 +42,15 @@ export default class Main extends Component<void, State> {
     }
 
     handleStoryArrays(storyArr) {
-        if(this.state.storyType === 'top' && this.state.topStories.length < 30) {
+        if(this.state.storyType === 'top' && this.state.topStories.length < 60) {
             this.setState((prevState) => ({
                 topStories: [...prevState.topStories, storyArr]
             }))
-        } else if(this.state.storyType === 'new' && this.state.newStories.length < 30) {
+        } else if(this.state.storyType === 'new' && this.state.newStories.length < 60) {
             this.setState((prevState) => ({
                 newStories: [...prevState.newStories, storyArr]
             }))
-        } else if(this.state.storyType === 'best' && this.state.bestStories.length < 30) {
+        } else if(this.state.storyType === 'best' && this.state.bestStories.length < 60) {
             this.setState((prevState) => ({
                 bestStories: [...prevState.bestStories, storyArr]
             }))
