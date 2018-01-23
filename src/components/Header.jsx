@@ -10,7 +10,7 @@ export default function Header() {
                 <Navbar.Header>
                     <Navbar.Brand>
                     <Link to="/">
-                        <h1>HackerNew</h1>                       
+                        <h1>H<span>N</span></h1>                       
                     </Link>
                     </Navbar.Brand>    
                 </Navbar.Header>
