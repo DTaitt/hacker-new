@@ -1,5 +1,6 @@
 * {
-  font-family: 'Muli', sans-serif; }
+  font-family: 'Muli', sans-serif;
+  box-sizing: border-box; }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -12,6 +13,9 @@ a {
 
 ul {
   list-style: none; }
+
+header nav.navbar-default {
+  margin: 0; }
 
 header nav div.container {
   font-size: 6vw;
@@ -31,8 +35,14 @@ header nav div.container {
     flex-direction: column;
     align-items: center; }
 
+form.search div.form-group {
+  margin: -4vw 0 4vw; }
+
+main div.form-group label {
+  margin: 2vw; }
+
 div.form-group {
-  margin: 0;
+  margin: -4vw 0 4vw;
   padding: 0;
   font-size: 6vw;
   text-align: center; }
@@ -58,6 +68,9 @@ div.story {
   div.story p {
     margin: 2vw 1vw;
     font-size: 6vw; }
+  div.story div.story-info {
+    flex: 1;
+    justify-content: center; }
   div.story div.interaction {
     display: flex;
     justify-content: space-around; }
@@ -66,15 +79,23 @@ div.story {
       padding: 2vw 1vw; }
 
 @media only screen and (min-width: 321px) {
+  form.search div.form-group {
+    margin: -2vw 0 4vw; }
+    form.search div.form-group input {
+      width: 95vw;
+      margin: auto; }
   div.form-group {
     font-size: 5vw; }
     div.form-group #story-filter {
-      height: 12vw; }
+      height: 10vw;
+      width: 95vw;
+      margin: auto; }
   div.story h2 {
     margin: 1vw;
-    font-size: 8vw; }
+    font-size: 7.5vw;
+    line-height: 10vw; }
   div.story p {
-    font-size: 6vw; } }
+    font-size: 5vw; } }
 
 @media only screen and (min-width: 426px) {
   header nav div.container {
@@ -90,51 +111,58 @@ div.story {
   div.form-group {
     font-size: 3vw; }
     div.form-group #story-filter {
-      height: 6vw; }
+      height: 5vw; }
   section.story-list {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    padding: 0; }
   div.story {
-    min-height: initial;
-    height: 47vw;
-    width: 47vw;
-    margin: 1vw; }
+    min-height: 30vw;
+    width: 32.4vw;
+    margin: .4vw 0; }
     div.story h2 {
       margin: 1vw;
-      font-size: 3.5vw;
-      line-height: 5vw; }
+      font-size: 3vw;
+      line-height: 4vw; }
     div.story p {
-      font-size: 2.2vw; } }
+      font-size: 2vw;
+      line-height: 3vw; }
+    div.story div.interaction * {
+      font-size: 3vw; } }
 
 @media only screen and (min-width: 769px) {
   header nav div.container {
     font-size: 2.6vw; }
+  form.search div.form-group input {
+    width: 90vw; }
   div.form-group {
     font-size: 2.5vw; }
     div.form-group #story-filter {
       height: 4vw;
-      width: 80vw;
+      width: 90vw;
       margin: 0 auto 2vw; }
   section.story-list {
-    padding: 1vw; }
+    padding: 1vw 6vw; }
   div.story {
-    height: 31.5vw;
-    width: 31.5vw;
+    min-height: 31.5vw;
+    width: 28.3vw;
     margin: .5vw;
     padding: .3vw; }
     div.story h2 {
       margin: 1.2vw .5vw;
       font-size: 2.5vw;
-      line-height: 2.9vw; }
+      line-height: 4vw; }
     div.story p {
       margin: 1vw .5vw;
       font-size: 1.8vw;
-      line-height: 1.5vw; } }
+      line-height: 2.5vw; } }
 
 @media only screen and (min-width: 1025px) {
   header nav div.container {
     font-size: 1.7vw; }
+  form.search div.form-group input {
+    width: 85vw; }
   div.form-group {
     font-size: 1.6vw; }
     div.form-group #story-filter {
@@ -144,7 +172,7 @@ div.story {
   section.story-list {
     padding: 1vw 6vw; }
   div.story {
-    height: 27.5vw;
+    min-height: 27.5vw;
     width: 27.5vw;
     margin: .5vw;
     padding: .3vw; }

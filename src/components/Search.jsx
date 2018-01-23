@@ -31,7 +31,7 @@ export default class Search extends Component<Props, State> {
 
     render() {
         return (
-            <form>
+            <form className="search" >
                 <FormGroup>
                     <ControlLabel></ControlLabel>
                     <FormControl
